@@ -1,0 +1,21 @@
+# numerical rules
+Grupo > 0
+Grupo < 7
+Tasa.natalidad >= 0
+Tasa.mortalidad >= 0
+Mortalidad.infantil >= 0
+Esperanza.vida.hombre >= 0
+Esperanza.vida.mujer >= 0
+PNB >= 0
+Población..miles. >= 0
+
+# categorical rules
+GRUPOS %in% c("EUROPA ORIENTAL","IBEROAMERICA","EO-NA_JAPON_AUSTR_NZ","ORIENTE MEDIO","ASIA","AFRICA")
+
+# mixed rules
+if ( GRUPOS == "EUROPA ORIENTAL") Grupo == 1
+if ( GRUPOS == "IBEROAMERICA") Grupo == 2
+if ( GRUPOS == "EO-NA_JAPON_AUSTR_NZ") Grupo == 3
+if ( GRUPOS == "ORIENTE MEDIO") Grupo == 4
+if ( GRUPOS == "ASIA") Grupo == 5
+if ( GRUPOS == "AFRICA") Grupo == 6

@@ -25,6 +25,10 @@ summary(Datos)
 
 ##--------------------- PREPROCESAMIENTO DE DATOS ---------------------##
 
+##----------------------------------------------------##
+## Formatos de variables                              ##
+##----------------------------------------------------##
+
 #Observando las etiquetas de la variable GRUPOS
 table(Datos$GRUPOS)
 
@@ -50,6 +54,9 @@ Datos <- transform(Datos,
                    )
 
 str(Datos$GRUPOS)
-summary(Datos)
+
+#------------------------------------------------------------##
+##Validacion de las reglas sobre los datos.                  ##
+#------------------------------------------------------------##
 
 
