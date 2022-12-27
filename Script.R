@@ -3,7 +3,7 @@
 #--- Laboratorio en R                               ---#
 #--- Integrantes:                                   ---#
 #--- Mauricio Munoz Gutierrez - 2123687             ---#
-#--- Juan Sebastian Getial Getial - XXXXXXX         ---#
+#--- Juan Sebastian Getial Getial - 2124644         ---#
 #------------------------------------------------------#
 
 # Instalacion de paquetes
