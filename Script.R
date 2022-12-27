@@ -70,3 +70,54 @@ matrix(data=1:55, 5, 11)
 # Visualización del diagnóstico
 windows()
 plot(Valid_Data)
+
+
+#------------------------------------------------------------##
+##Visualizacion de datos faltantes.                          ##
+#------------------------------------------------------------##
+
+#Vista por consola, si es verdadero es un valor nulo
+View(Datos)
+is.na(Datos)
+
+#Vista en ventana
+windows()
+visdat::vis_miss(Datos)
+
+#Identificacion de datos faltantes por columna y registro.
+miss<-function(Datos,plot=T){  
+  n=nrow(Datos);p=ncol(Datos)
+  names.obs<-rownames(Datos)
+  
+  
+  nobs.comp=sum(complete.cases(Datos))         # Cuenta los registros completos
+  Obs.comp=which(complete.cases(Datos))        # Identifica los registros completos
+  nobs.miss = sum(!complete.cases(Datos))      # Identifica los registros con datos faltantes.
+  Obs.miss=which(!complete.cases(Datos))       # Identifica los registros con datos faltantes.
+  
+  Datos.NA<-is.na(Datos)
+  Var_Num<- sort(colSums(Datos.NA),decreasing=T)
+  Var_per<-round(Var_Num/n,3)
+  Obs_Num<-rowSums(Datos.NA)
+  names(Obs_Num)<-names.obs
+  Obs_Num<-sort(Obs_Num,decreasing=T)
+  Obs_per<-round(Obs_Num/p,3)
+  lista<-list(n.row = n, n.col = p,n.comp = nobs.comp,Obs.comp = Obs.comp,n.miss = nobs.miss,Obs.miss = Obs.miss, Var.n = Var_Num , Var.p = Var_per, Obs.n= Obs_Num, Obs.per= Obs_per)
+  
+  if(plot){
+    windows(height=10,width=15)
+    par(mfrow=c(1,2))
+    coord<-barplot(Var_per,plot=F)
+    barplot(Var_per,xaxt="n",horiz=T,yaxt="n",xlim=c(-0.2,1), ylim=c(0,max(coord)+1),main= "% datos faltantes por variable")
+    axis(2,at=coord,labels=names(Var_per), cex.axis=0.5,pos=0,las=2)
+    axis(1,seq(0,1,0.2),seq(0,1,0.2),pos=0)
+    
+    coord<-barplot(Obs_per,plot=F)
+    barplot(Obs_per,xaxt="n",horiz=T,yaxt="n",xlim=c(-0.2,1), ylim=c(0,max(coord)+1),main= "% datos faltantes por registro")
+    axis(2,at=coord,labels=names(Obs_per),cex.axis=0.5,pos=0,las=2)
+    axis(1,seq(0,1,0.2),seq(0,1,0.2))
+  }
+  return(invisible(lista))
+}
+
+Summary.NA = miss(Datos)
