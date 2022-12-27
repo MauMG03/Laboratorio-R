@@ -59,4 +59,14 @@ str(Datos$GRUPOS)
 ##Validacion de las reglas sobre los datos.                  ##
 #------------------------------------------------------------##
 
+# Verificación de las reglas sobres los datos
+Valid_Data = editrules::violatedEdits(Rules, Datos)
+summary(Valid_Data)
 
+#Identificar que observaciones presentan violaciones a las reglas
+which(Valid_Data)
+matrix(data=1:55, 5, 11)
+
+# Visualización del diagnóstico
+windows()
+plot(Valid_Data)
