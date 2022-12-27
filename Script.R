@@ -29,37 +29,21 @@ summary(Datos)
 ## Formatos de variables                              ##
 ##----------------------------------------------------##
 
-#Observando las etiquetas de la variable GRUPOS
-table(Datos$GRUPOS)
+#Observando las etiquetas de las variables.
+str(Datos)
 
-#Declaracion de niveles correctos para las variables tipo Factor.
-level_GRUPOS <- c(africa="AFRICA",
-                  Africa="AFRICA",
-                  AFRICA="AFRICA",
-                  asia="ASIA",
-                  Asia="ASIA",
-                  ASIA="ASIA",
-                  'EO-NA_JAPON_AUSTR_NZ'="EO-NA_JAPON_AUSTR_NZ",
-                  'Europa Oriental'="EUROPA ORIENTAL",
-                  EUROPA_ORIENTAL="EUROPA ORIENTAL",
-                  iberoamerica="IBEROAMERICA",
-                  Iberoamerica="IBEROAMERICA",
-                  IBEROAMERICA="IBEROAMERICA",
-                  ORIENTE_MEDIO="ORIENTE MEDIO")
+#Cambio de etiqueta de GRUPOS a factor.
+Datos = transform(Datos,
+                  GRUPOS = factor(GRUPOS))
 
-#Modificacion del formato y transformacion de variables
-
-Datos <- transform(Datos,
-                   GRUPOS= factor(dplyr::recode(GRUPOS, !!!level_GRUPOS))
-                   )
-
-str(Datos$GRUPOS)
+str(Datos)
 
 #------------------------------------------------------------##
 ##Validacion de las reglas sobre los datos.                  ##
 #------------------------------------------------------------##
 
 # Verificación de las reglas sobres los datos
+Rules <- editrules::editfile("consistencia.txt")
 Valid_Data = editrules::violatedEdits(Rules, Datos)
 summary(Valid_Data)
 
@@ -121,3 +105,46 @@ miss<-function(Datos,plot=T){
 }
 
 Summary.NA = miss(Datos)
+
+#------------------------------------------------------------##
+##Correccion de datos nulos e inconsistentes.                ##
+#------------------------------------------------------------##
+
+#----------------- Correcion de Datos inconsistentes -----------------#
+#Declaracion de niveles correctos para las variables tipo Factor.
+level_GRUPOS <- c(africa="AFRICA",
+                  Africa="AFRICA",
+                  AFRICA="AFRICA",
+                  asia="ASIA",
+                  Asia="ASIA",
+                  ASIA="ASIA",
+                  'EO-NA_JAPON_AUSTR_NZ'="EO-NA_JAPON_AUSTR_NZ",
+                  'Europa Oriental'="EUROPA ORIENTAL",
+                  EUROPA_ORIENTAL="EUROPA ORIENTAL",
+                  iberoamerica="IBEROAMERICA",
+                  Iberoamerica="IBEROAMERICA",
+                  IBEROAMERICA="IBEROAMERICA",
+                  ORIENTE_MEDIO="ORIENTE MEDIO")
+
+
+#Modificacion del formato y transformacion de variables
+Datos <- transform(Datos,
+                   GRUPOS= factor(dplyr::recode(GRUPOS, !!!level_GRUPOS))
+)
+str(Datos$GRUPOS)
+
+#Visualizacion de datos.
+Valid_Data = editrules::violatedEdits(Rules, Datos)
+windows()
+plot(Valid_Data)
+
+#--------------------- Correccion de datos faltantes -------------------------#
+
+#Imputacion de datos faltantes (Regresion).
+imputR = mice::mice(Datos, maxit = 1, method = "norm.predict",seed = 2018,print=F)
+Datos_ImputR = mice::complete(imputR)
+windows(height=10,width=15); visdat::vis_miss(Datos_ImputR) 
+
+model_ImputR=lm(GRUPOS~.,Datos_ImputR[,-6]) 
+
+Summary.NA = miss(Datos_ImputR)
