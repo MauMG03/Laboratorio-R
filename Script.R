@@ -212,7 +212,7 @@ x11();barplot(
   col = 2:4
 )
 
-## 3. PNB per capita 
+##3. PNB per capita 
 ## Lo estamos considerando en este caso por cada 1000 habitantes, para
 ## tener valores mas trabajables
 datosLimpios <- dplyr::mutate(datosLimpios,
@@ -236,3 +236,30 @@ x11(display = "", 15, 10); boxplot(
   main = "PNB per capita por Grupo",
   xlab = "Grupos",
   ylab = "PNB per capita"
+)
+
+##--4.Clasificando segun cuartiles PNB per capita--##
+
+## Cuartiles
+Q1 <- quantile(datosLimpios$PNB.per.capita, c(0.25))
+Q2 <- quantile(datosLimpios$PNB.per.capita, c(0.50))
+Q3 <- quantile(datosLimpios$PNB.per.capita, c(0.75))
+
+## Funcion para clasificar nivel de pobreza
+nivelDePobreza <- function(PNBpercapita){
+  if (PNBpercapita < Q1){"Bajo"}
+  else if(PNBpercapita < Q2){"Medio Bajo"}
+  else if(PNBpercapita < Q3){"Medio Alto"}
+  else {"Alto"}
+}
+
+## Nueba columna NivelDePobreza
+datosLimpios <- dplyr::mutate(datosLimpios, 
+                              NivelDePobreza = 
+                                ifelse(PNB.per.capita < Q2, 
+                                       ifelse(PNB.per.capita < Q1,
+                                              "Bajo", "Medio Bajo"), 
+                                       ifelse(PNB.per.capita < Q3,
+                                              "Medio Alto", "Alto")
+                                       )
+                              )
