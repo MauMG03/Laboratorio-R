@@ -211,3 +211,5 @@ x11();barplot(
   main = "Variacion de los Indicadores Entre los Paises",
   col = 2:4
 )
+
+## 3. 
