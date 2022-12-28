@@ -18,7 +18,7 @@ easypackages::packages(lib_req)
 
 #Importar datos del excel
 
-Datos <- read_excel(".\\paises.xls")
+Datos <- read_excel("./paises.xls")
 
 str(Datos)
 summary(Datos) 
@@ -52,7 +52,7 @@ which(Valid_Data)
 matrix(data=1:55, 5, 11)
 
 # Visualización del diagnóstico
-windows()
+x11()
 plot(Valid_Data)
 
 
@@ -65,7 +65,7 @@ View(Datos)
 is.na(Datos)
 
 #Vista en ventana
-windows()
+x11()
 visdat::vis_miss(Datos)
 
 #Identificacion de datos faltantes por columna y registro.
@@ -89,7 +89,7 @@ miss<-function(Datos,plot=T){
   lista<-list(n.row = n, n.col = p,n.comp = nobs.comp,Obs.comp = Obs.comp,n.miss = nobs.miss,Obs.miss = Obs.miss, Var.n = Var_Num , Var.p = Var_per, Obs.n= Obs_Num, Obs.per= Obs_per)
   
   if(plot){
-    windows(height=10,width=15)
+    x11(display = "", 15, 10)
     par(mfrow=c(1,2))
     coord<-barplot(Var_per,plot=F)
     barplot(Var_per,xaxt="n",horiz=T,yaxt="n",xlim=c(-0.2,1), ylim=c(0,max(coord)+1),main= "% datos faltantes por variable")
@@ -135,7 +135,7 @@ str(Datos$GRUPOS)
 
 #Visualizacion de datos.
 Valid_Data = editrules::violatedEdits(Rules, Datos)
-windows()
+x11()
 plot(Valid_Data)
 
 #--------------------- Correccion de datos faltantes -------------------------#
@@ -143,7 +143,7 @@ plot(Valid_Data)
 #Imputacion de datos faltantes (Regresion).
 imputR = mice::mice(Datos, maxit = 1, method = "norm.predict",seed = 2018,print=F)
 Datos_ImputR = mice::complete(imputR)
-windows(height=10,width=15); visdat::vis_miss(Datos_ImputR) 
+x11(display = "", 15, 10); visdat::vis_miss(Datos_ImputR) 
 
 model_ImputR=lm(GRUPOS~.,Datos_ImputR[,-6]) 
 
