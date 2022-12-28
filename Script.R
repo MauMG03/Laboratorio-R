@@ -164,6 +164,12 @@ load("datosLimpios.RData")
 
 ##--1. Como está conformada la muestra (distribución) de países según grupo.--#
 distribucion <- table(datosLimpios$GRUPOS)
+grupos <- c("AFRICA",
+            "ASIA",
+            "EO-NA_JAPON_AUSTR_NZ",
+            "EUROPA ORIENTAL",
+            "IBEROAMERICA",
+            "ORIENTE MEDIO")
 
 x11()
 barplot(distribucion,
