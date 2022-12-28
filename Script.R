@@ -183,3 +183,31 @@ barplot(distribucion,
 legend(x=3.75,y=30,legend = grupos,
        fill = c("2","3","4","5","6","7"),
        bg = "lightgray")
+
+##--2. Diferencia en los indicadores para los paises.##
+
+##Coeficiente VAriacion(%) Tasa natalidad 
+cvTasNat = round(
+  (sd(datosLimpios$Tasa.natalidad)/mean(datosLimpios$Tasa.natalidad))*100 
+, 2)
+
+##Coeficiente VAriacion(%) Tasa Mortalidad
+cvTasMort = round(
+  (sd(datosLimpios$Tasa.mortalidad)/mean(datosLimpios$Tasa.mortalidad))*100 
+  , 2)
+
+##Coeficiente VAriacion(%) Mortalidad Infantil
+cvMortInf = round(
+  (sd(datosLimpios$Mortalidad.infantil)/mean(datosLimpios$Mortalidad.infantil))*100 
+  , 2)
+
+x11();barplot(
+  c(TasaNatalidad = cvTasNat, 
+    TasaMortalidad = cvTasMort, 
+    MortalidadInfantil = cvMortInf),
+  xlab = "Indicadores",
+  ylab = "% Variacion",
+  ylim = c(0,100),
+  main = "Variacion de los Indicadores Entre los Paises",
+  col = 2:4
+)
