@@ -163,3 +163,15 @@ rm(list = ls())
 load("datosLimpios.RData")
 
 ##--1. Como está conformada la muestra (distribución) de países según grupo.--#
+x11()
+barplot(distribucion,
+        xlab = "Grupo",
+        ylab = "Numero de paises",
+        ylim = c(0,30),
+        names.arg = c("6","5","3","1","2","4"),
+        main = "Distribucion de paises segun grupo",
+        col = c("2","3","4","5","6","7"))
+
+legend(x=3.75,y=30,legend = grupos,
+       fill = c("2","3","4","5","6","7"),
+       bg = "lightgray")
