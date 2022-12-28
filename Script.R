@@ -161,3 +161,13 @@ rm(list = ls())
 
 ## Importacion de los datos limpios
 load("datosLimpios.RData")
+
+##--1. Como está conformada la muestra (distribución) de países según grupo.--#
+x11(display = "", 15, 10); plot(
+  datosLimpios$GRUPOS,
+  xlab="Grupos", 
+  ylab="Numero de Paises", 
+  col=2:7, 
+  ylim = c(0, 30),
+  main="Distribucion Paises Segun Grupo"
+)
