@@ -212,4 +212,27 @@ x11();barplot(
   col = 2:4
 )
 
-## 3. 
+## 3. PNB per capita 
+## Lo estamos considerando en este caso por cada 1000 habitantes, para
+## tener valores mas trabajables
+datosLimpios <- dplyr::mutate(datosLimpios,
+                       PNB.per.capita = PNB/Población..miles.)
+
+## Grafica PNB per capita segun grupo (escala pequeña)
+x11(display = "", 15, 10); boxplot( 
+        datosLimpios$PNB.per.capita ~ datosLimpios$GRUPOS, 
+        ylim = c(-0.2, 1),
+        col = 2:7,
+        main = "PNB per capita por Grupo",
+        xlab = "Grupos",
+        ylab = "PNB per capita"
+)
+
+## Grafica PNB per capita segun grupo (escala grande)
+x11(display = "", 15, 10); boxplot( 
+  datosLimpios$PNB.per.capita ~ datosLimpios$GRUPOS, 
+  ylim = c(-0.2, 14),
+  col = 2:7,
+  main = "PNB per capita por Grupo",
+  xlab = "Grupos",
+  ylab = "PNB per capita"
