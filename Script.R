@@ -245,14 +245,6 @@ Q1 <- quantile(datosLimpios$PNB.per.capita, c(0.25))
 Q2 <- quantile(datosLimpios$PNB.per.capita, c(0.50))
 Q3 <- quantile(datosLimpios$PNB.per.capita, c(0.75))
 
-## Funcion para clasificar nivel de pobreza
-nivelDePobreza <- function(PNBpercapita){
-  if (PNBpercapita < Q1){"Bajo"}
-  else if(PNBpercapita < Q2){"Medio Bajo"}
-  else if(PNBpercapita < Q3){"Medio Alto"}
-  else {"Alto"}
-}
-
 ## Nueba columna NivelDePobreza
 datosLimpios <- dplyr::mutate(datosLimpios, 
                               NivelDePobreza = 
