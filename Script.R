@@ -148,3 +148,16 @@ x11(display = "", 15, 10); visdat::vis_miss(Datos_ImputR)
 model_ImputR=lm(GRUPOS~.,Datos_ImputR[,-6]) 
 
 Summary.NA = miss(Datos_ImputR)
+
+#Almacenamiento de los datos limpios como objeto .RData
+datosLimpios = Datos_ImputR
+save(datosLimpios, file="datosLimpios.RData")
+
+
+##------------------------ VISUALIZACION DE LOS DATOS ----------------------##
+
+## Limpieza del entorno de trabajo
+rm(list = ls())
+
+## Importacion de los datos limpios
+load("datosLimpios.RData")
