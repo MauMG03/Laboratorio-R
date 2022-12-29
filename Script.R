@@ -264,29 +264,35 @@ par(mfrow=c(2,3))
 barplot(table((datosLimpios %>% filter(Grupo == 1))$NivelDePobreza),
         xlab = "Nivel de Riqueza",
         ylab = "Numero de paises",
-        main = "Nivel de Riqueza (EUROPA ORIENTAL)")
+        main = "Nivel de Riqueza (EUROPA ORIENTAL)",
+        col = 5)
 
 barplot(table((datosLimpios %>% filter(Grupo == 2))$NivelDePobreza),
         xlab = "Nivel de Riqueza",
         ylab = "Numero de paises",
-        main = "Nivel de Riqueza (IBEROAMERICA)")
+        main = "Nivel de Riqueza (IBEROAMERICA)",
+        col = 6)
 
 barplot(table((datosLimpios %>% filter(Grupo == 3))$NivelDePobreza),
         xlab = "Nivel de Riqueza",
         ylab = "Numero de paises",
-        main = "Nivel de Riqueza (EO_NA-JAPAN_AUSTR_NZ)")
+        main = "Nivel de Riqueza (EO_NA-JAPON_AUSTR_NZ)",
+        col = 4)
 
 barplot(table((datosLimpios %>% filter(Grupo == 4))$NivelDePobreza),
         xlab = "Nivel de Riqueza",
         ylab = "Numero de paises",
-        main = "Nivel de Riqueza (ORIENTE MEDIO)")
+        main = "Nivel de Riqueza (ORIENTE MEDIO)",
+        col = 7)
 
 barplot(table((datosLimpios %>% filter(Grupo == 5))$NivelDePobreza),
         xlab = "Nivel de Riqueza",
         ylab = "Numero de paises",
-        main = "Nivel de Riqueza (ASIA)")
+        main = "Nivel de Riqueza (ASIA)",
+        col = 3)
 
 barplot(table((datosLimpios %>% filter(Grupo == 6))$NivelDePobreza),
         xlab = "Nivel de Riqueza",
         ylab = "Numero de paises",
-        main = "Nivel de Riqueza (AFRICA)")
+        main = "Nivel de Riqueza (AFRICA)",
+        col = 2)
