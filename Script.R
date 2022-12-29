@@ -255,3 +255,38 @@ datosLimpios <- dplyr::mutate(datosLimpios,
                                               "Medio Alto", "Alto")
                                        )
                               )
+
+
+
+x11()
+par(mfrow=c(2,3))
+
+barplot(table((datosLimpios %>% filter(Grupo == 1))$NivelDePobreza),
+        xlab = "Nivel de Riqueza",
+        ylab = "Numero de paises",
+        main = "Nivel de Riqueza (EUROPA ORIENTAL)")
+
+barplot(table((datosLimpios %>% filter(Grupo == 2))$NivelDePobreza),
+        xlab = "Nivel de Riqueza",
+        ylab = "Numero de paises",
+        main = "Nivel de Riqueza (IBEROAMERICA)")
+
+barplot(table((datosLimpios %>% filter(Grupo == 3))$NivelDePobreza),
+        xlab = "Nivel de Riqueza",
+        ylab = "Numero de paises",
+        main = "Nivel de Riqueza (EO_NA-JAPAN_AUSTR_NZ)")
+
+barplot(table((datosLimpios %>% filter(Grupo == 4))$NivelDePobreza),
+        xlab = "Nivel de Riqueza",
+        ylab = "Numero de paises",
+        main = "Nivel de Riqueza (ORIENTE MEDIO)")
+
+barplot(table((datosLimpios %>% filter(Grupo == 5))$NivelDePobreza),
+        xlab = "Nivel de Riqueza",
+        ylab = "Numero de paises",
+        main = "Nivel de Riqueza (ASIA)")
+
+barplot(table((datosLimpios %>% filter(Grupo == 6))$NivelDePobreza),
+        xlab = "Nivel de Riqueza",
+        ylab = "Numero de paises",
+        main = "Nivel de Riqueza (AFRICA)")
