@@ -185,32 +185,30 @@ legend(x=3.75,y=30,legend = grupos,
        bg = "lightgray")
 
 ##--2. Diferencia en los indicadores para los paises.##
+x11()
+par(mfrow=c(1,3))
 
-##Coeficiente VAriacion(%) Tasa natalidad 
-cvTasNat = round(
-  (sd(datosLimpios$Tasa.natalidad)/mean(datosLimpios$Tasa.natalidad))*100 
-, 2)
+boxplot(datosLimpios$Tasa.natalidad ~ datosLimpios$Grupo,
+        xlab = "Grupo",
+        ylab = "Tasa de natalidad",
+        main = "Tasa de natalidad por grupo",
+        col = c("2","3","4","5","6","7")
+        )
 
-##Coeficiente VAriacion(%) Tasa Mortalidad
-cvTasMort = round(
-  (sd(datosLimpios$Tasa.mortalidad)/mean(datosLimpios$Tasa.mortalidad))*100 
-  , 2)
-
-##Coeficiente VAriacion(%) Mortalidad Infantil
-cvMortInf = round(
-  (sd(datosLimpios$Mortalidad.infantil)/mean(datosLimpios$Mortalidad.infantil))*100 
-  , 2)
-
-x11();barplot(
-  c(TasaNatalidad = cvTasNat, 
-    TasaMortalidad = cvTasMort, 
-    MortalidadInfantil = cvMortInf),
-  xlab = "Indicadores",
-  ylab = "% Variacion",
-  ylim = c(0,100),
-  main = "Variacion de los Indicadores Entre los Paises",
-  col = 2:4
+boxplot(datosLimpios$Tasa.mortalidad ~ datosLimpios$Grupo,
+        xlab = "Grupo",
+        ylab = "Tasa de mortalidad",
+        main = "Tasa de mortalidad por grupo",
+        col = c("2","3","4","5","6","7")
 )
+
+boxplot(datosLimpios$Mortalidad.infantil ~ datosLimpios$Grupo,
+        xlab = "Grupo",
+        ylab = "Tasa de mortalidad infantil",
+        main = "Tasa de mortalidad infantil por grupo",
+        col = c("2","3","4","5","6","7")
+)
+
 
 ##3. PNB per capita 
 ## Lo estamos considerando en este caso por cada 1000 habitantes, para
