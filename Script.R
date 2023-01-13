@@ -182,7 +182,8 @@ barplot(distribucion,
 
 legend(x=3.75,y=30,legend = grupos,
        fill = c("2","3","4","5","6","7"),
-       bg = "lightgray")
+       bg = "lightgray",
+       bty = "n")
 
 ##--2. Diferencia en los indicadores para los paises.##
 x11()
@@ -192,22 +193,27 @@ boxplot(datosLimpios$Tasa.natalidad ~ datosLimpios$Grupo,
         xlab = "Grupo",
         ylab = "Tasa de natalidad",
         main = "Tasa de natalidad por grupo",
-        col = c("2","3","4","5","6","7")
+        col = c("5","6","4","7","3","2")
         )
 
 boxplot(datosLimpios$Tasa.mortalidad ~ datosLimpios$Grupo,
         xlab = "Grupo",
         ylab = "Tasa de mortalidad",
         main = "Tasa de mortalidad por grupo",
-        col = c("2","3","4","5","6","7")
+        col = c("5","6","4","7","3","2")
 )
 
 boxplot(datosLimpios$Mortalidad.infantil ~ datosLimpios$Grupo,
         xlab = "Grupo",
         ylab = "Tasa de mortalidad infantil",
         main = "Tasa de mortalidad infantil por grupo",
-        col = c("2","3","4","5","6","7")
+        col = c("5","6","4","7","3","2")
 )
+
+legend(x=0,y=185,legend = grupos,
+       fill = c("2","3","4","5","6","7"),
+       bg = "lightgray",
+       bty = "n")
 
 
 ##3. PNB per capita 
@@ -217,24 +223,32 @@ datosLimpios <- dplyr::mutate(datosLimpios,
                        PNB.per.capita = PNB/Población..miles.)
 
 ## Grafica PNB per capita segun grupo (escala pequeña)
-x11(display = "", 15, 10); boxplot( 
+x11()
+par(mfrow=c(1,2))
+
+boxplot( 
         datosLimpios$PNB.per.capita ~ datosLimpios$GRUPOS, 
         ylim = c(-0.2, 1),
         col = 2:7,
-        main = "PNB per capita por Grupo",
+        main = "PNB per capita por Grupo (escala pequeña)",
         xlab = "Grupos",
         ylab = "PNB per capita"
 )
 
 ## Grafica PNB per capita segun grupo (escala grande)
-x11(display = "", 15, 10); boxplot( 
+boxplot( 
   datosLimpios$PNB.per.capita ~ datosLimpios$GRUPOS, 
   ylim = c(-0.2, 14),
   col = 2:7,
-  main = "PNB per capita por Grupo",
+  main = "PNB per capita por Grupo (escala grande)",
   xlab = "Grupos",
   ylab = "PNB per capita"
 )
+
+legend(x=0.5,y=14.25,legend = grupos,
+       fill = c("2","3","4","5","6","7"),
+       bg = "lightgray",
+       bty = "n")
 
 ##--4.Clasificando segun cuartiles PNB per capita--##
 
